@@ -34,17 +34,15 @@ buildTpl:
 debugTpl:
 	go-bindata -o tmpl/bindata.go -ignore bindata.go -pkg tmpl -debug tmpl/*
 
-genjava: buildTpl
-	go build
-	./tgen gen -l java -i example/java/ShipForMe.thrift -o ./javaoutput
+gen-java: gen-java-rest gen-java-jsonrpc
 
-genjavajsonrpc: buildTpl
-	go build
-	./tgen gen -l java -m jsonrpc -i example/java/ShipForMe.thrift -o ./javaoutputjsonrpc
+gen-java-jsonrpc: buildTpl
+	rm -rf output-java-jsonrpc
+	go run main.go gen -l java -m jsonrpc -i example/java/ShipForMe.thrift -o ./output-java-jsonrpc
 
-genjavarest: buildTpl
-	go build
-	./tgen gen -l java -m rest -i example/java/ShipForMe.thrift -o ./javaoutputrest
+gen-java-rest: buildTpl
+	rm -rf output-java-rest
+	go run main.go gen -l java -m rest -i example/java/ShipForMe.thrift -o ./output-java-rest
 
 gen-swift-rest: buildTpl
 	rm -rf output-swift-rest
@@ -59,8 +57,9 @@ gen-swift: gen-swift-rest gen-swift-jsonrpc
 clean:
 	go clean
 	rm -rf ./output-swift-rest
-	rm -rf javaoutputrest
-	rm -rf javaoutputjsonrpc
+	rm -rf ./output-swift-jsonrpc
+	rm -rf ./output-java-rest
+	rm -rf ./output-java-jsonrpc
 
 build:
 	go clean
