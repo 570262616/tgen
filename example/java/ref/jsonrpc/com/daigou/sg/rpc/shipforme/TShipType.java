@@ -8,11 +8,15 @@ import com.google.gson.annotations.SerializedName;
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public enum TShipType implements java.io.Serializable {
 <<<<<<< HEAD
 =======
 public enum TShipType implements java.io.Serializable, DeserializerEnum {
 >>>>>>> a846c86... modify Java template
+=======
+public enum TShipType implements java.io.Serializable, com.daigou.sg.rpc.DeserializerEnum {
+>>>>>>> 854bbf7... add package name
 	@SerializedName("1")
 	AA(1),
 =======

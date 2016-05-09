@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 {{ $data := . -}}
 
-public enum {{.Enum.Name}} implements java.io.Serializable, DeserializerEnum {
+public enum {{.Enum.Name}} implements java.io.Serializable, com.daigou.sg.rpc.DeserializerEnum {
 {{.GenerateProperties}}
 
 	int type;
